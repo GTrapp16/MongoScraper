@@ -1,0 +1,48 @@
+{{#each this}}
+{{#if this._id}}
+
+<div class="article-card card col-12 my-3">
+  <div class="card-body">
+    <h4 class="article-title card-title"> <a href={{this.link}}>{{this.title}} </a></h4>
+    <h6 class="card-subtitle mb-2 text-muted">   </h6>
+    <p class="card-text"> </p>
+	<button type="button" data-article-id={{this._id}}  data-saved={{this.isSaved}} class="d-inline-block save-article-btn btn btn-info mb-2">
+		{{#if this.isSaved}}
+			<i class="fa fa-bookmark" aria-hidden="true"></i>
+		{{else}}
+			<i class="fa fa-bookmark-o" aria-hidden="true"></i>
+		{{/if}}
+	</button>
+	<button type="button" data-article-id={{this._id}} class="d-inline-block view-comments-btn btn btn-warning mb-2">
+		{{#if this.comments.length}}
+			<i class="fa fa-comments-o" aria-hidden="true"></i> | {{this.comments.length}} 
+		{{else}}
+			<i class="fa fa-pencil" aria-hidden="true"></i> | 0
+		{{/if}}
+	</button>
+  </div>
+</div>	
+
+<div id="comments-{{this._id}}" data-visible="no" class="comment-card card col-12 my-3 hidden">
+	<div id="comment-box-{{this._id}}">
+		{{#each this.comments}}
+	  	<div id="comment-details-{{this._id}}"class="card-body p-2">
+  			<div data-comment-id={{this._id}} class="d-inline-block delete-comment-btn btn btn-alert"><i class="fa fa-trash-o" aria-hidden="true"></i></div>
+  	  		<div class="d-inline-block">
+  	  			<h6 class="card-subtitle text-muted ">{{this.body}}</h6>
+    		</div>
+  		</div>
+		{{/each}}
+	</div>
+	<div id="form-{{this._id}}" data-visible="no" class="comment-form-card card-body">
+		<form>
+			<div class="form-group">
+		    <textarea class="form-control" id="comment-body-{{this._id}}" rows="3" placeholder="Say something!"></textarea>
+		    	<button type="submit" data-article-id={{this._id}} class="submit-comment-btn btn btn-warning mt-2"> <i class="fa fa-check" aria-hidden="true"></i> Submit </button>
+		  </div>
+		</form>
+	</div>
+</div>
+
+{{/if}}
+{{/each}}

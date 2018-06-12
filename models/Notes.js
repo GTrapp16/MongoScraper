@@ -9,18 +9,22 @@ var NoteSchema = new Schema({
   // `title` is of type String
   body: {
       type: String,
+      required: true
   }, 
-      article: {
-          type: Schema.Types.ObjectId,
-          ref: "Article"
-      }
+      
+      
+          createdAt: {
+              type: Date,
+              default: Date.now()
+          }
+      
   
   // `body` is of type String
   
 });
 
 // This creates our model from the above schema, using mongoose's model method
-var Note = mongoose.model("Note", NoteSchema);
+var Notes = mongoose.model("Notes", NoteSchema);
 
 // Export the Note model
-module.exports = Note;
+module.exports = Notes;
